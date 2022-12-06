@@ -36,9 +36,40 @@ class MahasiswaController extends Controller
         $dataMahasiswa = $mahasiswa->create($data);
 
         return response()->json([
-            'success' => 'true',
+            'success' => true,
             'message' => 'Data mahasiswa berhasil disimpan',
             'data' => $dataMahasiswa
+        ]);
+    }
+
+    public function update(Request $request, Mahasiswa $mahasiswa)
+    {
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'nama' => 'required|string|max:191',
+            'nim' => 'required|string|max:191',
+            'alamat' => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $mahasiswa->update($data);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data mahasiswa berhasil diperbaharui'
+        ]);
+    }
+
+    public function hapus(Mahasiswa $mahasiswa)
+    {
+        $mahasiswa->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data mahasiswa berhasil dihapus'
         ]);
     }
 }
