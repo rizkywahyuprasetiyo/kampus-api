@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\DosenController;
 use App\Http\Controllers\API\MahasiswaController;
+use App\Http\Controllers\API\ProposalSkripsiController;
 
 Route::controller(MahasiswaController::class)->group(function () {
     Route::get('/mahasiswa', 'index');
@@ -17,4 +18,8 @@ Route::controller(DosenController::class)->group(function () {
     Route::post('/dosen/simpan', 'simpan');
     Route::patch('/dosen/{dosen}/update', 'update');
     Route::delete('/dosen/{dosen}/hapus', 'hapus');
+});
+
+Route::controller(ProposalSkripsiController::class)->group(function () {
+    Route::get('/proposal', 'index');
 });
