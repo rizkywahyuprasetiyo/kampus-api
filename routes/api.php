@@ -2,9 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\DosenController;
 use App\Http\Controllers\API\MahasiswaController;
 use App\Http\Controllers\API\ProposalSkripsiController;
+
+Route::post('/auth/register', [AuthController::class, 'createUser']);
+Route::post('/auth/login', [AuthController::class, 'loginUser']);
 
 Route::controller(MahasiswaController::class)->group(function () {
     Route::get('/mahasiswa', 'index');
@@ -20,6 +24,4 @@ Route::controller(DosenController::class)->group(function () {
     Route::delete('/dosen/{dosen}/hapus', 'hapus');
 });
 
-Route::controller(ProposalSkripsiController::class)->group(function () {
-    Route::get('/proposal', 'index');
-});
+Route::get('/proposal', [ProposalSkripsiController::class, 'index']);
