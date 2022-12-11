@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\ResponseFormatter;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -98,9 +99,10 @@ class AuthController extends Controller
         }
     }
 
-    public function logoutUser(Request $request)
+    public function logout(Request $request)
     {
         $token = $request->user()->currentAccessToken()->delete();
-        return ResponseFormatter::success($token, 'Token Refoked');
+
+        return ResponseFormatter::success($token, 'Token revoked.');
     }
 }
