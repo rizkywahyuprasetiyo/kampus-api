@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Mahasiswa;
+use App\Models\ProposalSkripsi;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -32,11 +33,16 @@ class DatabaseSeeder extends Seeder
         //     'nim' => '171229382',
         //     'alamat' => 'Jalan Pramuka, Sungai Rengas'
         // ]);
-        Dosen::create([
-            'nama' => 'Budiman, M.Kom',
-            'nim' => '118384838',
-            'alamat' => 'Jalan Lintas Selatan, Gang Tani'
-        ]);
+        // Dosen::create([
+        //     'nama' => 'Budiman, M.Kom',
+        //     'nim' => '118384838',
+        //     'alamat' => 'Jalan Lintas Selatan, Gang Tani'
+        // ]);
+        ProposalSkripsi::create([
+            'judul_ta' =>'Sistem Informasi Manajemen Berbasis Resiko',
+            'kategori' =>'RPL',
+            'status'=>'Submitted'
+    ]);
 
     }
 }
