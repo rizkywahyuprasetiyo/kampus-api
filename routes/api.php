@@ -7,6 +7,11 @@ use App\Http\Controllers\API\DosenController;
 use App\Http\Controllers\API\MahasiswaController;
 use App\Http\Controllers\API\ProposalSkripsiController;
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::controller(AuthController::class)->group(function () {
+        Route::post('/auth/logout', 'logout');
+    });
+});
 Route::post('/auth/register', [AuthController::class, 'createUser']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);
 
