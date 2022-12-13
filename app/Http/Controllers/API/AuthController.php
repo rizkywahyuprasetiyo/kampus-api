@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 
 class AuthController extends Controller
 {
@@ -43,7 +43,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Created Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                'token' => $user->createToken("API TOKEN")->plainTextToken,
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -89,7 +89,8 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                'token' => $user->createToken("API TOKEN")->plainTextToken,
+                'user' => $user
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -102,7 +103,6 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $token = $request->user()->currentAccessToken()->delete();
-
         return ResponseFormatter::success($token, 'Token revoked.');
     }
 }
