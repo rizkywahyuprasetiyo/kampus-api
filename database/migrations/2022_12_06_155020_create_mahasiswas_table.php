@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('mahasiswa', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->foreignId('user_id');
             $table->string('nim');
             $table->text('alamat');
             $table->timestamps();

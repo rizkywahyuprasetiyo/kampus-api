@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\ResponseFormatter;
+use App\Models\User;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -71,5 +73,13 @@ class MahasiswaController extends Controller
             'success' => true,
             'message' => 'Data mahasiswa berhasil dihapus'
         ]);
+    }
+
+    public function deleteUser(User $user, Request $request)
+    {
+        $token = $request->user()->currentAccessToken()->delete();
+        $data = $user->delete();
+
+        return ResponseFormatter::success([$data, $token], 'Data user berhasil dihapus.');
     }
 }
