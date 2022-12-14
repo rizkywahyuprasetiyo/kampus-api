@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Helpers\ResponseFormatter;
 use App\Models\User;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use App\Helpers\ResponseFormatter;
+use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
@@ -81,5 +82,14 @@ class MahasiswaController extends Controller
         $data = $user->delete();
 
         return ResponseFormatter::success([$data, $token], 'Data user berhasil dihapus.');
+    }
+
+    public function updateUser(User $user, UserRequest $userRequest)
+    {
+        $data = $userRequest->validated();
+
+        $user->update($data);
+
+        return ResponseFormatter::success(null, 'Data user berhasil diperbaharui.');
     }
 }
