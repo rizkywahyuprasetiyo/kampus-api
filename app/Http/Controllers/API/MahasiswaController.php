@@ -76,6 +76,11 @@ class MahasiswaController extends Controller
         ]);
     }
 
+    public function getUser(User $user)
+    {
+        return ResponseFormatter::success($user, 'Data user berhasil diambil');
+    }
+
     public function deleteUser(User $user, Request $request)
     {
         $token = $request->user()->currentAccessToken()->delete();
