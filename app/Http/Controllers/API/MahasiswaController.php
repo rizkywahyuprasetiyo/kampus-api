@@ -92,6 +92,7 @@ class MahasiswaController extends Controller
     public function updateUser(User $user, UserRequest $userRequest)
     {
         $data = $userRequest->validated();
+        $data['password'] = bcrypt($data['password']);
 
         $user->update($data);
 
