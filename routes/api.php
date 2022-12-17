@@ -2,10 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\DosenController;
-use App\Http\Controllers\API\MahasiswaController;
-use App\Http\Controllers\API\ProposalSkripsiController;
+use App\Http\Controllers\API\{AuthController, DosenController, MahasiswaController, NewsController, ProposalSkripsiController};
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::controller(AuthController::class)->group(function () {
@@ -16,6 +13,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/mahasiswa/{user}/get', 'getUser');
         Route::patch('/mahasiswa/{user}/update', 'updateUser');
         Route::delete('/mahasiswa/{user}/delete', 'deleteUser');
+    });
+
+    Route::controller(NewsController::class)->group(function () {
+        Route::get('/pengumuman', 'index');
+        Route::post('/pengumuman/simpan', 'simpan');
     });
 });
 Route::post('/auth/register', [AuthController::class, 'createUser']);
