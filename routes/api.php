@@ -13,11 +13,16 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/mahasiswa/{user}/get', 'getUser');
         Route::patch('/mahasiswa/{user}/update', 'updateUser');
         Route::delete('/mahasiswa/{user}/delete', 'deleteUser');
+        Route::get('/mahasiswa/sedang-login', 'sedangLogin');
     });
 
     Route::controller(NewsController::class)->group(function () {
         Route::get('/pengumuman', 'index');
         Route::post('/pengumuman/simpan', 'simpan');
+    });
+    Route::controller(ProposalSkripsiController::class)->group(function () {
+        Route::get('/proposal', 'index');
+        Route::post('/proposal/simpan', 'simpan');
     });
 });
 Route::post('/auth/register', [AuthController::class, 'createUser']);
@@ -36,5 +41,3 @@ Route::controller(DosenController::class)->group(function () {
     Route::patch('/dosen/{dosen}/update', 'update');
     Route::delete('/dosen/{dosen}/hapus', 'hapus');
 });
-
-Route::get('/proposal', [ProposalSkripsiController::class, 'index']);

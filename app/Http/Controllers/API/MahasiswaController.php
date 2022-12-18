@@ -98,4 +98,10 @@ class MahasiswaController extends Controller
 
         return ResponseFormatter::success(null, 'Data user berhasil diperbaharui.');
     }
+
+    public function sedangLogin()
+    {
+        $data = auth()->user();
+        return ResponseFormatter::success($data, 'Data yang sedang login berhasil diambil');
+    }
 }
